@@ -21,6 +21,11 @@ app.get("/", (req, res) => {
   res.send("Hello World boule!");
 });
 
+// app.use("/connexion", require("./routes/connexionRoutes"));
+
+app.use("/users", require("./routes/usersRoutes"));
+
+
 //start server
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
