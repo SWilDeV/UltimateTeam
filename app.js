@@ -4,6 +4,7 @@ const cors = require("cors");
 const passport = require("passport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const router = require("./api/routes");
 const csrf = require("csurf");
 require("dotenv").config();
 
@@ -21,10 +22,7 @@ app.get("/", (req, res) => {
   res.send("Hello World boule!");
 });
 
-// app.use("/connexion", require("./routes/connexionRoutes"));
-
-app.use("/users", require("./routes/usersRoutes"));
-
+app.use("/api", router);
 
 //start server
 app.listen(port, () => {
