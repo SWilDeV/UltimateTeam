@@ -6,11 +6,12 @@ class User {
     FirstName,
     LastName,
     City,
-    UserID,
     Presentation,
     Avatar,
     CountryName,
-    DateJoined
+    DateJoined,
+    CountryID,
+    IdGame
   ) {
     this.Username = Username;
     this.Email = Email;
@@ -18,11 +19,12 @@ class User {
     this.Password = Password;
     this.LastName = LastName;
     this.City = City;
-    this.UserID = UserID;
     this.Presentation = Presentation;
     this.Avatar = Avatar;
     this.CountryName = CountryName;
     this.DateJoined = DateJoined;
+    this.CountryID = CountryID;
+    this.IdGame = IdGame;
   }
 }
 

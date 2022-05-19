@@ -3,7 +3,8 @@ const UserServices = require("./UserServices");
 
 exports.getAllUsers = async (req, res, next) => {
   try {
-    res.send("get all post routes");
+    const [users, _] = await UserServices.getUsers();
+    res.status(200).json({ users });
   } catch (e) {
     console.log(e);
   }
@@ -24,7 +25,7 @@ exports.addCountry = async (req, res, next) => {
     // let Pays = new Post(title, body);
 
     // post = await post.save();
-    
+
     const Pays = await UserServices.addCountry(NomPays, Drapeau);
     res.status(201).json({ message: "Post created" });
   } catch (e) {
@@ -40,7 +41,7 @@ exports.getUserByID = async (req, res, next) => {
   }
 };
 
-exports.registerUser = async (req, res, next) => {
+exports.registerUser = (req, res, next) => {
   try {
     let {
       Username,
@@ -49,14 +50,14 @@ exports.registerUser = async (req, res, next) => {
       FirstName,
       LastName,
       City,
-      UserID,
       Presentation,
       Avatar,
       CountryName,
-      DateJoined,
+      CountryID,
+      IdGame,
     } = req.body;
 
-    // let newUser = new User(req.body);
+    let DateJoined = new Date().toJSON().slice(0, 10);
     let newUser = new User(
       Username,
       Email,
@@ -64,17 +65,17 @@ exports.registerUser = async (req, res, next) => {
       FirstName,
       LastName,
       City,
-      UserID,
       Presentation,
       Avatar,
       CountryName,
-      DateJoined
+      DateJoined,
+      CountryID,
+      IdGame
     );
-    console.log(newUser);
-    // let newUser2 = await newUser.addUser();
-    // console.log(newUser2);
 
-    res.status(201).json({ newUser });
+    let newUser2 = UserServices.addUser(newUser);
+    console.log(newUser2);
+    res.status(201).json({ newUser2 });
     // res.status(201).json({ message: "user registered" });
   } catch (error) {
     next(error);
