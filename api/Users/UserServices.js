@@ -22,8 +22,17 @@ let getCountries = function (callback) {
     console.log(err);
   }
 };
+let addCountry = function (NomPays, Drapeau) {
+  try {
+    let sql = `Insert into Pays (NomPays, Drapeau) values ('${NomPays}', '${Drapeau}');`;
+    return db.execute(sql);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 module.exports = {
   getCountries,
+  addCountry,
   addUser,
 };

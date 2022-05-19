@@ -20,11 +20,12 @@ exports.getCountries = async (req, res, next) => {
 
 exports.addCountry = async (req, res, next) => {
   try {
-    let { IdPays, NomPays } = req.body;
-    let Pays = new Post(title, body);
+    let { NomPays, Drapeau } = req.body;
+    // let Pays = new Post(title, body);
 
-    post = await post.save();
-
+    // post = await post.save();
+    
+    const Pays = await UserServices.addCountry(NomPays, Drapeau);
     res.status(201).json({ message: "Post created" });
   } catch (e) {
     console.log(e);
