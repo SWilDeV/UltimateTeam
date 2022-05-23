@@ -1,21 +1,31 @@
 const User = require("./UserModel");
 const UserServices = require("./UserServices");
 
-exports.getAllUsers = async (req, res, next) => {
+exports.getAllUsers = (req, res) => {
   try {
-    const [users, _] = await UserServices.getUsers();
-    res.status(200).json({ users });
+    UserServices.getUsers(function (err, data) {
+      if (err) {
+        console.log("ERROR : ", err);
+      } else {
+        res.status(201).json({ data });
+      }
+    });
   } catch (e) {
     console.log(e);
   }
 };
 
-exports.getUserByUsername = async (req, res, next) => {
+exports.getUserByUsername = (req, res, next) => {
   try {
     let Username = req.body.Username;
-    const [user, _] = await UserServices.getUserByUsernameDB(Username);
-    const userFinal = user[0];
-    res.status(201).json({ userFinal });
+    UserServices.getUserByUsernameDB(Username, function (err, data) {
+      if (err) {
+        console.log("ERROR : ", err);
+      } else {
+        console.log(data);
+        res.status(201).json({ data });
+      }
+    });
   } catch (e) {
     console.log(e);
   }
@@ -49,19 +59,21 @@ exports.registerUser = async (req, res, next) => {
       (CountryID = req.body.CountryID),
       (IdGame = req.body.IdGame)
     );
-
-    const operationAddUser = await UserServices.addUser(newUser);
-    console.log(operationAddUser);
-    setTimeout(async () => {
-      const [newUser2, _] = await UserServices.getUserByUsernameDB(Username);
-      const userF = newUser2[0];
-      if (userF == undefined) {
-        res.status(400).json({ message: "Failed to add user" });
+    UserServices.addUser(newUser, function (err, data) {
+      if (err) {
+        console.log("ERROR : ", err);
+        res.status(404).json({ msg: "user already exist" });
       } else {
-        userF.Password = "";
-        res.status(201).json({ userF });
+        UserServices.getUserByUsernameDB(Username, function (err, data) {
+          if (err) {
+            console.log("ERROR : ", err);
+          } else {
+            delete data.Password;
+            res.status(201).json({ data });
+          }
+        });
       }
-    }, "200");
+    });
   } catch (error) {
     next(error);
   }
