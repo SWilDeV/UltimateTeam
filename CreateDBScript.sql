@@ -7,14 +7,14 @@ Use UltimateTeam;
 
 Create table if not exists Pays(
 IdPays int NOT NULL auto_increment,
-NomPays varchar(50) NOT NULL,
+LastNamePays varchar(50) NOT NULL,
 Drapeau varchar(100),
 Primary key (IdPays)
 );
 
 Create table if not exists Game(
 IdGame int NOT NULL auto_increment,
-Nom varchar(50) NOT NULL,
+LastName varchar(50) NOT NULL,
 DateSortie varchar(50),
 TypeJeu varchar(50),
 DescriptionJeu varchar(1000),
@@ -24,19 +24,19 @@ PRIMARY KEY(idGame)
 
 
 CREATE TABLE IF NOT EXISTS Utilisateur (
-	IdJoueur INT auto_increment,
+	UserID INT auto_increment,
 	Username VARCHAR(50) UNIQUE,
 	Password VARCHAR(100),
-	Courriel VARCHAR(50) UNIQUE,
-	Prenom VARCHAR(50),
-	Nom VARCHAR(50),
+	Email VARCHAR(50) UNIQUE,
+	FirstName VARCHAR(50),
+	LastName VARCHAR(50),
 	Ville VARCHAR(50),
 	Presentation TEXT,
 	Avatar VARCHAR(50),
 	IdPays INT,
 	IdGame INT,
 	DateJoined VARCHAR(20),
-    PRIMARY KEY (IdJoueur),
+    PRIMARY KEY (UserID),
     FOREIGN KEY (IdGame) REFERENCES Game (IdGame),
     FOREIGN KEY (IdPays) REFERENCES Pays (IdPays)
 );
@@ -44,14 +44,14 @@ CREATE TABLE IF NOT EXISTS Utilisateur (
 
 Create table if not exists Equipe(
 IdEquipe int NOT NULL auto_increment,
-NomEquipe varchar(100) NOT NULL UNIQUE,
+LastNameEquipe varchar(100) NOT NULL UNIQUE,
 Presentation varchar(1000),
 Logo varchar(2000),
 IdOwner int NOT NULL,
 IdPays int,
 IdGame int,
 PRIMARY KEY (IdEquipe),
-FOREIGN KEY (IdOwner) REFERENCES Utilisateur (IdJoueur),
+FOREIGN KEY (IdOwner) REFERENCES Utilisateur (UserID),
 FOREIGN KEY (IdPays) REFERENCES Pays (IdPays),
 FOREIGN KEY (IdGame) REFERENCES Game (IdGame)
 );
@@ -69,7 +69,7 @@ IdGame int,
 IdOwner int NOT NULL,
 Logo varchar(1000),
 PRIMARY KEY (IdTournoi),
-FOREIGN KEY (IdOwner) REFERENCES Utilisateur (IdJoueur),
+FOREIGN KEY (IdOwner) REFERENCES Utilisateur (UserID),
 FOREIGN KEY (IdGame) REFERENCES Game (IdGame)
 );
 
@@ -90,13 +90,13 @@ FOREIGN KEY (IdTournoi) REFERENCES Tournoi (IdTournoi)
 );
 
 CREATE TABLE IF NOT EXISTS MembresEquipe(
-IdJoueur int NOT NULL,
+UserID int NOT NULL,
 IdEquipe int NOT NULL,
 DateJoined varchar(50) NOT NULL,
 DateLeft varchar(50),
-PRIMARY KEY(IdJoueur, IdEquipe),
+PRIMARY KEY(UserID, IdEquipe),
 FOREIGN KEY (IdEquipe) REFERENCES Equipe (IdEquipe),
-FOREIGN KEY (IdJoueur) REFERENCES Utilisateur (IdJoueur)
+FOREIGN KEY (UserID) REFERENCES Utilisateur (UserID)
 );
 
 CREATE TABLE IF NOT EXISTS Inscription(

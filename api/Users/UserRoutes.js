@@ -2,19 +2,15 @@ const express = require("express");
 const userRouter = express.Router();
 const userControllers = require("./UserControllers");
 
-// userRouter
-//   .route("/countries")
-//   .get(userControllers.getCountries)
-//   .post(userControllers.addCountry);
+//@route GET && POST - /posts/
+userRouter.route("/").get(userControllers.getAllUsers);
 
 userRouter.route("/username").get(userControllers.getUserByUsername);
 
-userRouter.route("/id/:id").get(userControllers.getUserByID);
+userRouter.route("/register").post(userControllers.registerUser);
 
-//@route GET && POST - /posts/
-userRouter
-  .route("/")
-  .get(userControllers.getAllUsers)
-  .post(userControllers.registerUser);
+userRouter.route("/authenticate").post(userControllers.authenticate);
+
+userRouter.route("/id/:id").get(userControllers.getUserByID);
 
 module.exports = userRouter;
