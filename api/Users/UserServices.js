@@ -53,8 +53,6 @@ let getUserById = function (id, callback) {
   } catch (err) {
     console.log(err);
   }
-  // const query = { _id: id };
-  // User.findById(query, callback);
 };
 
 let comparePassword = function (candidatePassword, hashedPassword, callback) {
