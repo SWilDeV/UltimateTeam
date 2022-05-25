@@ -7,7 +7,7 @@ Use UltimateTeam;
 
 Create table if not exists Pays(
 IdPays int NOT NULL auto_increment,
-LastNamePays varchar(50) NOT NULL,
+LastName varchar(50) NOT NULL,
 Drapeau varchar(100),
 Primary key (IdPays)
 );
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Utilisateur (
 	Email VARCHAR(50) UNIQUE,
 	FirstName VARCHAR(50),
 	LastName VARCHAR(50),
-	Ville VARCHAR(50),
+	City VARCHAR(50),
 	Presentation TEXT,
 	Avatar VARCHAR(50),
 	IdPays INT,

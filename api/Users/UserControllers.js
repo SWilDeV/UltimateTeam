@@ -32,16 +32,6 @@ exports.getUserByUsername = (req, res, next) => {
     console.log(e);
   }
 };
-exports.getUserByID = async (req, res, next) => {
-  try {
-    // let Username = req.body.Username;
-    // const [newUser3, _] = await UserServices.getUserByUsername(Username);
-    // console.log(newUser3);
-    // res.status(201).json({ newUser3 });
-  } catch (e) {
-    console.log(e);
-  }
-};
 
 exports.registerUser = async (req, res, next) => {
   try {
@@ -111,9 +101,9 @@ exports.authenticate = async (req, res, next) => {
                   FirstName: data.FirstName,
                   Avatar: data.Avatar,
                   LastName: data.LastName,
-                  Ville: data.Ville,
+                  City: data.City,
                   Presentation: data.Presentation,
-                  LastNamePays: data.LastNamePays,
+                  LastName: data.LastName,
                   DateJoined: data.DateJoined,
                 },
               });

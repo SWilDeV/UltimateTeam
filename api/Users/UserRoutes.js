@@ -11,6 +11,4 @@ userRouter.route("/register").post(userControllers.registerUser);
 
 userRouter.route("/authenticate").post(userControllers.authenticate);
 
-userRouter.route("/id/:id").get(userControllers.getUserByID);
-
 module.exports = userRouter;

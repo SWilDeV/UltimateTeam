@@ -8,7 +8,7 @@ let addUser = function (User, callback) {
       bcrypt.hash(User.Password, salt, (err, hash) => {
         User.Password = hash;
         if (err) throw err;
-        let sql = `insert into Utilisateur (Username, Password, Email, FirstName, LastName, Ville, Presentation, Avatar, IdPays, IdGame, DateJoined) VALUES('${User.Username}', '${User.Password}', '${User.Email}', '${User.FirstName}', '${User.LastName}', '${User.City}', '${User.Presentation}', '${User.Avatar}', '${User.CountryID}', '${User.IdGame}', '${User.DateJoined}');`;
+        let sql = `insert into Utilisateur (Username, Password, Email, FirstName, LastName, City, Presentation, Avatar, IdPays, IdGame, DateJoined) VALUES('${User.Username}', '${User.Password}', '${User.Email}', '${User.FirstName}', '${User.LastName}', '${User.City}', '${User.Presentation}', '${User.Avatar}', '${User.CountryID}', '${User.IdGame}', '${User.DateJoined}');`;
         db.query(sql, function (err) {
           if (err) callback(err, null);
           else callback(null, "success");
@@ -33,7 +33,7 @@ let getUsers = function (callback) {
 };
 let getUserByUsernameDB = function (Username, callback) {
   try {
-    let sql = `SELECT UserID, Username,Password, FirstName,Avatar, LastName, Ville, Presentation, Email,LastNamePays, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.Username = '${Username}';`;
+    let sql = `SELECT UserID, Username,Password, FirstName,Avatar, LastName, City, Presentation, Email,LastName, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.Username = '${Username}';`;
     db.query(sql, function (err, result) {
       if (err) callback(err, null);
       else callback(null, result[0]);
@@ -45,7 +45,7 @@ let getUserByUsernameDB = function (Username, callback) {
 
 let getUserById = function (id, callback) {
   try {
-    let sql = `SELECT UserID, Username,Password, FirstName,Avatar, LastName, Ville, Presentation, Email,LastNamePays, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.UserID = '${id}';`;
+    let sql = `SELECT UserID, Username,Password, FirstName,Avatar, LastName, City, Presentation, Email,LastName, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.UserID = '${id}';`;
     db.query(sql, function (err, result) {
       if (err) callback(err, null);
       else callback(null, result[0]);
