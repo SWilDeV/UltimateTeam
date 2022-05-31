@@ -28,10 +28,8 @@
                 v-for="item in navigation"
                 :key="item.name"
                 :class="[
-                  item.current
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                  'px-3 py-2 rounded-md text-sm font-medium',
+                  'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  'px-3 py-2 rounded-md text-l font-medium',
                 ]"
                 :aria-current="item.current ? 'page' : undefined"
                 :to="item.route"
@@ -51,10 +49,8 @@
                 v-for="item in navigationRight"
                 :key="item.name"
                 :class="[
-                  item.current
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                  'px-3 py-2 rounded-md text-sm font-medium',
+                  'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  'px-3 py-2 rounded-md text-l font-medium',
                 ]"
                 :aria-current="item.current ? 'page' : undefined"
                 :to="item.route"
@@ -116,7 +112,23 @@
 
     <DisclosurePanel class="sm:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <DisclosureButton
+        <DisclosureButton>
+          <RouterLink
+            v-for="item in navigation"
+            :key="item.name"
+            :class="[
+              item.current
+                ? 'bg-gray-900 text-white'
+                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+              'block px-3 py-2 rounded-md text-base font-medium',
+            ]"
+            :aria-current="item.current ? 'page' : undefined"
+            :to="item.route"
+            @click="changeStatus(item)"
+            >{{ item.name }}
+          </RouterLink>
+        </DisclosureButton>
+        <!-- <DisclosureButton
           v-for="item in navigation"
           :key="item.name"
           as="a"
@@ -129,7 +141,7 @@
           ]"
           :aria-current="item.current ? 'page' : undefined"
           >{{ item.name }}</DisclosureButton
-        >
+        > -->
       </div>
     </DisclosurePanel>
   </Disclosure>
