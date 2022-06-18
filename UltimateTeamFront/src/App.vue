@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- <NavBar id="app" /> -->
-    <NavBar2 id="app" />
-    <RouterView />
+    <NavBar2 />
+    <RouterView class="app bg-gray-700 w-100 h-100" />
   </div>
   <!-- <header>
     
@@ -16,13 +16,13 @@
 </template>
 
 <script setup>
-import { RouterView } from "vue-router";
-// import { RouterLink, RouterView } from "vue-router";
-import NavBar2 from "@/components/NavBar2.vue";
+  import { RouterView } from "vue-router";
+  // import { RouterLink, RouterView } from "vue-router";
+  import NavBar2 from "@/components/NavBar2.vue";
 </script>
 
 <style>
-/* #app {
+  /* #app {
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
