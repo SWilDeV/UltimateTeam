@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import ProfileView2 from "../views/ProfileView2.vue";
-// import ProfileView from "../views/ProfileView.vue";
+import ProfileView from "../views/ProfileView.vue";
 import TournoisListView from "../views/TournoisListView.vue";
 import TeamsListView from "../views/TeamsListView.vue";
 import RegisterView from "../views/RegisterView.vue";
@@ -19,7 +18,7 @@ const router = createRouter({
     {
       path: "/profile",
       name: "profile",
-      component: ProfileView2,
+      component: ProfileView,
     },
 
     {

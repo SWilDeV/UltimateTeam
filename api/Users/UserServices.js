@@ -33,7 +33,8 @@ let getUsers = function (callback) {
 };
 let getUserByUsernameDB = function (Username, callback) {
   try {
-    let sql = `SELECT UserID, Username,Password, FirstName,Avatar, LastName, City, Presentation, Email,LastName, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.Username = '${Username}';`;
+    let sql = `SELECT UserID, Username, Password, FirstName, LastName, Avatar, City, Presentation, Email, DateJoined, IdPays FROM Utilisateur WHERE Utilisateur.Username = '${Username}';`;
+    // let sql = `SELECT UserID, Username,Password, FirstName, Avatar, City, Presentation, Email, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.Username = '${Username}';`;
     db.query(sql, function (err, result) {
       if (err) callback(err, null);
       else callback(null, result[0]);
@@ -45,7 +46,7 @@ let getUserByUsernameDB = function (Username, callback) {
 
 let getUserById = function (id, callback) {
   try {
-    let sql = `SELECT UserID, Username,Password, FirstName,Avatar, LastName, City, Presentation, Email,LastName, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.UserID = '${id}';`;
+    let sql = `SELECT UserID, Username,Password, FirstName,Avatar, FirstName, City, Presentation, Email,LastName, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.UserID = '${id}';`;
     db.query(sql, function (err, result) {
       if (err) callback(err, null);
       else callback(null, result[0]);

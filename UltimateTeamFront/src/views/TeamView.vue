@@ -1,16 +1,3 @@
-<script setup></script>
-
-<!-- <template>
-  <div class="container">
-    <h1>ProfileView</h1>
-    <div class="max-w-screen-md mx-auto p-5">
-      <div>
-
-      </div>
-    </div>
-  </div>
-</template> -->
-
 <template>
   <div class="dashboard p-4">
     <div class="mt-5 w-full">
@@ -101,3 +88,5 @@
     <!-- grid wrapper card -->
   </div>
 </template>
+
+<script setup></script>

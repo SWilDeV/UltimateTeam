@@ -8,7 +8,6 @@
 
 <script setup>
   import { RouterView } from "vue-router";
-  // import { RouterLink, RouterView } from "vue-router";
   import NavBar2 from "@/components/NavBar2.vue";
 </script>
 

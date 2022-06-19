@@ -1,324 +1,92 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="main-body">
-        <div class="row gutters-sm">
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex flex-column align-items-center text-center">
-                  <img
-                    src="../assets/avatar7.png"
-                    alt="Admin"
-                    class="rounded-circle"
-                    width="150"
-                  />
-                  <div class="mt-3">
-                    <h4>{{ user.Username }}</h4>
-                    <p class="text-muted font-size-sm">
-                      {{ user.Ville }}, {{ user.NomPays }}
-                    </p>
-                    <p class="text-secondary mb-1">
-                      {{ user.Presentation }}
-                    </p>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <b-button
-                        class="ms-auto"
-                        type="button"
-                        variant="info"
-                        v-on:click="toggleEdit"
-                        >Edit</b-button
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-12 mb-3 mt-1">
-              <div class="row gutters-sm">
-                <div class="col-sm-12 mb-3">
-                  <div class="col-sm-12 mb-3">
-                    <b-form>
-                      <b-form-group
-                        v-if="isVisible"
-                        id="input-group-4"
-                        label="Prenom:"
-                        label-for="input-4"
-                      >
-                        <b-form-input
-                          v-model="form.Prenom"
-                          id="input-4"
-                        ></b-form-input>
-                      </b-form-group>
-
-                      <b-form-group
-                        v-if="isVisible"
-                        id="input-group-5"
-                        label="Nom:"
-                        label-for="input-5"
-                      >
-                        <b-form-input
-                          v-model="form.Nom"
-                          id="input-5"
-                        ></b-form-input>
-                      </b-form-group>
-
-                      <b-form-group
-                        v-if="isVisible"
-                        id="input-group-6"
-                        label="Ville:"
-                        label-for="input-6"
-                      >
-                        <b-form-input
-                          v-model="form.Ville"
-                          id="input-6"
-                        ></b-form-input>
-                      </b-form-group>
-
-                      <b-form-group
-                        v-if="isVisible"
-                        id="input-group-8"
-                        label="Pays:"
-                        label-for="input-7"
-                      >
-                        <b-form-select
-                          :options="options2"
-                          size=""
-                          v-model="form.IdPays"
-                          class="m-1"
-                        ></b-form-select>
-                      </b-form-group>
-
-                      <b-form-group
-                        v-if="isVisible"
-                        id="input-group-7"
-                        label="Presentation:"
-                        label-for="input-6"
-                      >
-                        <b-form-input
-                          v-model="form.Presentation"
-                          id="input-7"
-                        ></b-form-input>
-                      </b-form-group>
-
-                      <b-button
-                        v-if="isVisible"
-                        type="button"
-                        class="mt-2"
-                        variant="success"
-                        v-on:click="onSubmit"
-                        >OK</b-button
-                      >
-                    </b-form>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div class="dashboard p-4">
+    <div class="mt-5 w-full">
+      <h1 class="text-2xl text-gray-200 font-medium">Profile Page</h1>
+    </div>
+    <!-- User Presentation -->
+    <div class="mt-2 lg:flex block lg:gap-2">
+      <div class="object-center">
+        <div
+          class="bg-gray-800 p-5 lg:w-96 lg:mt-0 mt-4 shadow rounded-md w-full text-center"
+        >
+          <div class="object-center">
+            <img
+              src="../assets/avatar7.png"
+              alt=""
+              width="100"
+              height="100"
+              class="rounded-full block object-center"
+            />
+            <div></div>
           </div>
-
-          <div class="col-md-8">
-            <div class="card mb-3">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">UserName</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ user.Username }}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Email</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ user.Courriel }}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Nom</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ user.Prenom }} {{ user.Nom }}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Pays</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ user.NomPays }}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Inscrit le:</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ user.DateJoined }}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row gutters-sm">
-              <div class="col-sm-4 mb-3">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h6 class="d-flex align-items-center mb-3">
-                      <i class="material-icons text-info mr-2"
-                        >Tournois inscrits</i
-                      >
-                    </h6>
-
-                    <div>
-                      <TournoiComponent
-                        class="card h-100 m-1"
-                        v-for="tournoi in Tournois"
-                        :key="tournoi.IdTournoi"
-                        :nom-tournoi="tournoi.nomTournoi"
-                        :IdTournoi="tournoi.IdTournoi"
-                        :nom-jeu="tournoi.nomJeu"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4 mb-3">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h6 class="d-flex align-items-center mb-3">
-                      <i class="material-icons text-info mr-2"
-                        >Equipes dont je fais parti</i
-                      >
-                    </h6>
-
-                    <div>
-                      <EquipeComponent
-                        class="card h-100 m-1"
-                        v-for="equipe in Equipes"
-                        :key="equipe.IdEquipe"
-                        :nom-equipe="equipe.NomEquipe"
-                        :IdEquipe="equipe.IdEquipe"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4 mb-3">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h6 class="d-flex align-items-center mb-3">
-                      <i class="material-icons text-info mr-2">Matchs</i>
-                    </h6>
-                    <div class="mb-3">
-                      <MatchComponent
-                        class="card h-100 m-1"
-                        v-for="match in Parties"
-                        :key="match.IdMatch"
-                        :NomEquipeA="match.nomEquipe1"
-                        :NomEquipeB="match.nomEquipe2"
-                        :NomTournoi="match.nomTournoi"
-                        :dateMatch="match.dateMatch"
-                        :heureMatch="match.heureMatch"
-                        :scoreEquipe1="match.scoreEquipe1"
-                        :scoreEquipe2="match.scoreEquipe2"
-                        :IdEquipe1="match.idEquipe1"
-                        :IdEquipe2="match.idEquipe2"
-                        :IdTournoi="match.idTournoi"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <h2 class="text-gray-300 text-xl font-bold">Jean-Luc</h2>
+          <p class="font-medium font-lg mt-2 text-gray-200">Osaka, Japon</p>
+          <div class="mt-4 grid grid-cols-1 gap-4">
+            <p class="text-gray-300">
+              Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl
+              Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed,
+              nislMorbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed,
+              nislMorbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed,
+              nislMorbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed,
+              nisl
+            </p>
           </div>
         </div>
       </div>
+      <!-- User Info -->
+      <div class="lg:flex block w-full mt-2">
+        <div class="bg-gray-800 p-5 w-full rounded-md box-border shadow">
+          <div class="flex justify-between w-full">
+            <h2 class="font-bold text-gray-300">Username</h2>
+            <h2 class="text-gray-300 font-bold pr-5">M3lanSh'On</h2>
+          </div>
+          <hr />
+          <div class="flex justify-between w-full mt-5">
+            <h2 class="font-bold text-gray-300">Email</h2>
+            <h2 class="text-gray-300 font-bold pr-5">aaa@aa.com</h2>
+          </div>
+          <hr />
+          <div class="flex justify-between w-full mt-5">
+            <h2 class="font-bold text-gray-300">Nom</h2>
+            <h2 class="text-gray-300 font-bold pr-5">aaa aaa</h2>
+          </div>
+          <hr />
+          <div class="flex justify-between w-full mt-5">
+            <h2 class="font-bold text-gray-300">Pays</h2>
+            <h2 class="text-gray-300 font-bold pr-5">France</h2>
+          </div>
+          <hr />
+          <div class="flex justify-between w-full mt-5">
+            <h2 class="font-bold text-gray-300">Inscrit le:</h2>
+            <h2 class="text-gray-300 font-bold pr-5">2022-06-18</h2>
+          </div>
+          <hr />
+        </div>
+      </div>
     </div>
+    <!-- Tournament info-->
+    <div class="mt-2 lg:flex block lg:gap-2">
+      <div class="mt-2 bg-gray-800 p-5 w-full rounded-md box-border shadow">
+        <h2 class="font-bold text-lg text-gray-200">Tournois inscrits</h2>
+        <p class="text-gray-400 font-lexend font-normal">
+          New products this week
+        </p>
+      </div>
+      <div class="mt-2 bg-gray-800 p-5 w-full rounded-md box-border shadow">
+        <h2 class="font-bold text-lg text-gray-300 dark:text-gray-200">
+          Equipes dont je fais parti
+        </h2>
+        <p class="text-gray-400 font-lexend font-normal">Visitor this week</p>
+      </div>
+      <div class="mt-2 bg-gray-800 p-5 w-full rounded-md box-border shadow">
+        <h2 class="font-bold text-lg text-gray-200">Matchs</h2>
+        <p class="text-gray-400 font-lexend font-normal">
+          User signups this week
+        </p>
+      </div>
+    </div>
+    <!-- grid wrapper card -->
   </div>
 </template>
 
-<script>
-  // import EquipeComponent from "../components/EquipeComponent.vue";
-  // import MatchComponent from "../components/MatchComponent.vue";
-  // import TournoiComponent from "../components/TournoiComponent.vue";
-  // import { getUserDataByUserID, EditUser } from "../apiVue.js";
-  export default {
-    name: "ProfileView",
-    components: {
-      // EquipeComponent,
-      // MatchComponent,
-      // TournoiComponent,
-    },
-    data() {
-      return {
-        isVisible: false,
-        user: "",
-        Parties: "",
-        Equipes: "",
-        Tournois: "",
-        form: {
-          Nom: "",
-          Prenom: "",
-          Ville: "",
-          IdPays: "",
-          Presentation: "",
-          IdJoueur: "",
-        },
-        options2: [
-          { value: null, text: "Please select an option" },
-          { value: "1", text: "France" },
-          { value: "2", text: "Japon" },
-          { value: "3", text: "Espagne" },
-          { value: "4", text: "Italie" },
-          { value: "5", text: "Canada" },
-          { value: "6", text: "Allemagne" },
-          { value: "7", text: "Russie" },
-          { value: "8", text: "Chine" },
-          { value: "9", text: "Corée" },
-        ],
-      };
-    },
-    async created() {
-      // const user = JSON.parse(localStorage.getItem("user")).IdJoueur;
-      // const userObj = { IdUser: user };
-      // await getUserDataByUserID(userObj).then((response) => {
-      //   if (response.User != null) {
-      //     this.user = response.User;
-      //     this.Parties = response.Parties;
-      //     this.Equipes = response.Equipes;
-      //     this.Tournois = response.Tournois;
-      //   }
-      // });
-    },
-    methods: {
-      // async onSubmit() {
-      //   try {
-      //     this.form.IdJoueur = this.user.IdJoueur;
-      //     await EditUser(this.form);
-      //     this.$router.go();
-      //   } catch (e) {
-      //     console.error(e);
-      //   }
-      // },
-      toggleEdit() {
-        if (this.isVisible == false) {
-          this.isVisible = true;
-        } else {
-          this.isVisible = false;
-        }
-      },
-    },
-  };
-</script>
-
-<style scoped></style>
+<script setup></script>
