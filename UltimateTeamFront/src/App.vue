@@ -2,17 +2,8 @@
   <div>
     <!-- <NavBar id="app" /> -->
     <NavBar2 />
-    <RouterView class="app bg-gray-700 w-100 h-100" />
+    <RouterView class="app min-h-screen bg-gray-700" />
   </div>
-  <!-- <header>
-    
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header> -->
 </template>
 
 <script setup>
