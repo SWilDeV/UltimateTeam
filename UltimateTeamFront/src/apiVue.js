@@ -59,7 +59,7 @@ export async function EditEquipe(data) {
 export async function getTournaments() {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${import.meta.env.VITE_BASE_URL}/listTournaments`)
+      .get(`${import.meta.env.VITE_BASE_URL}/api/tournaments`)
       .then((res) => {
         resolve(res.data);
       })

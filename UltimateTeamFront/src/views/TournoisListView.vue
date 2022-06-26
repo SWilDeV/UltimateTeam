@@ -1,10 +1,7 @@
 <script setup>
-  import { getUsers } from "../apiVue";
-  // import { ref } from "vue";
-  // let result = ref(null);
-  getUsers().then((response) => {
-    const rresult = response;
-    console.log(rresult.data);
+  import { getTournaments } from "../apiVue";
+  getTournaments().then((response) => {
+    this.tournaments = response.data;
   });
 
   // onMounted(() => {
@@ -18,5 +15,6 @@
 <template>
   <div>
     <h1>TournoiListViews</h1>
+    <!-- <div>{{ tournaments[0].nomTournoi }}</div> -->
   </div>
 </template>
