@@ -1,50 +1,25 @@
 <script>
   import { getTournaments } from "../apiVue";
   import { ref, defineComponent } from "vue";
-  export default defineComponent({
+  export default {
     setup() {
-      let tournament = ref(null);
+      const Tournaments = ref({});
       try {
-        const tournament = getTournaments().then((response) => {
-          const data = response.data;
-          console.log(data);
-          return data;
+        Tournaments.value = getTournaments().then((response) => {
+          Tournaments.value = response.data;
         });
       } catch (e) {
         console.log(e);
       }
 
-      return { tournament };
+      return { Tournaments };
     },
-  });
-
-  // const tournament = getTournaments().then((response) => {
-  //   this.tournaments = response.data;
-  //   return Promise.resolve(response.data);
-  // });
-  // console.log(tournament);
-
-  // const tournament = ref(null);
-  // async function tourn(){
-  //   try{
-  //     const tournament = await getTournaments()
-  //   }
-  //   catch (e) {
-  //     console.log(e)
-  //   }
-  // }
-
-  // onMounted(() => {
-  //   test();
-  // });
-  // function test() {
-  //   console.log(import.meta.env.VITE_BASE_URL);
-  // }
+  };
 </script>
 
 <template>
   <div>
     <h1>TournoiListViews</h1>
-    <!-- <div>{{ tournament }}</div> -->
+    <div>{{ Tournaments }}</div>
   </div>
 </template>
