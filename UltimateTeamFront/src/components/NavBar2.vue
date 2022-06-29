@@ -177,7 +177,5 @@
       element.current = false;
     });
     item.current = true;
-    // console.log(item.name + ", " + item.current);
-    // console.log("hello");
   };
 </script>
