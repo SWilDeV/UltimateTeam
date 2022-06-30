@@ -2,7 +2,7 @@
   <div>
     <!-- <NavBar id="app" /> -->
     <NavBar2 />
-    <RouterView class="app min-h-screen bg-gray-700" />
+    <RouterView class="app min-h-screen bg-gray-600" />
   </div>
 </template>
 
