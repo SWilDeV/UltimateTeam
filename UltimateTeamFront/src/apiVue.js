@@ -268,7 +268,7 @@ export async function EditPartie(data) {
 export async function registerUser(data) {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${import.meta.env.VITE_BASE_URL}/register`, {
+      .post(`${import.meta.env.VITE_BASE_URL}/api/users/register`, {
         data,
       })
       .then((res) => {
