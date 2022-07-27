@@ -8,7 +8,7 @@ let addUser = function (User, callback) {
       bcrypt.hash(User.Password, salt, (err, hash) => {
         User.Password = hash;
         if (err) throw err;
-        let sql = `insert into Utilisateur (Username, Password, Email, FirstName, LastName, City, Presentation, Avatar, IdPays, IdGame, DateJoined) VALUES('${User.Username}', '${User.Password}', '${User.Email}', '${User.FirstName}', '${User.LastName}', '${User.City}', '${User.Presentation}', '${User.Avatar}', '${User.CountryID}', '${User.IdGame}', '${User.DateJoined}');`;
+        let sql = `insert into Utilisateur (Username, Password, Email, FirstName, LastName, City, Presentation, Avatar, IdPays, DateJoined) VALUES('${User.Username}', '${User.Password}', '${User.Email}', '${User.FirstName}', '${User.LastName}', '${User.City}', '${User.Presentation}', '${User.Avatar}', '${User.CountryID}', '${User.DateJoined}');`;
         db.query(sql, function (err) {
           if (err) callback(err, null);
           else callback(null, "success");

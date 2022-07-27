@@ -10,7 +10,7 @@
           Register
         </h3>
       </div>
-      <form class="w-full">
+      <div class="w-full">
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -98,14 +98,46 @@
             >
               Country
             </label>
-            <input
+
+            <Listbox v-model="selectedCountry">
+              <ListboxButton
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200 text-left"
+                >{{ selectedCountry.text }}</ListboxButton
+              >
+              <ListboxOptions
+                class="mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-200 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              >
+                <ListboxOption
+                  v-slot="{ active, selected }"
+                  v-for="option in options"
+                  :key="option.value"
+                  :value="option"
+                  ><li
+                    :class="[
+                      active ? 'bg-amber-100 text-amber-900' : 'text-gray-900',
+                      'relative cursor-default select-none py-2 pl-10 pr-4',
+                    ]"
+                  >
+                    <span
+                      :class="[
+                        selected ? 'font-medium' : 'font-normal',
+                        'block truncate',
+                      ]"
+                    >
+                      {{ option.text }}
+                    </span>
+                  </li>
+                </ListboxOption>
+              </ListboxOptions>
+            </Listbox>
+            <!-- <input
               id="Country"
               :value="Country"
               @input="updateCountry"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               placeholder="Japan"
-            />
+            /> -->
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -143,7 +175,7 @@
             </textarea>
           </div>
         </div>
-      </form>
+      </div>
       <div class="flex justify-between w-full">
         <button
           class="shadow bg-indigo-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
@@ -160,14 +192,33 @@
 <script setup>
   import { ref } from "vue";
   import { registerUser } from "../apiVue";
+  import {
+    Listbox,
+    ListboxButton,
+    ListboxOptions,
+    ListboxOption,
+  } from "@headlessui/vue";
+
   const Username = ref("");
   const Password = ref("");
   const Email = ref("");
   const FirstName = ref("");
   const LastName = ref("");
   const City = ref("");
-  const Country = ref("");
   const Presentation = ref("");
+  const options = [
+    { value: null, text: "Please select an option" },
+    { value: 5, text: "Canada" },
+    { value: "8", text: "China" },
+    { value: "1", text: "France" },
+    { value: "6", text: "Germany" },
+    { value: "4", text: "Italy" },
+    { value: "2", text: "Japan" },
+    { value: "9", text: "Korea" },
+    { value: "7", text: "Russia" },
+    { value: "3", text: "Spain" },
+  ];
+  const selectedCountry = ref(options[0]);
 
   const updateUsername = (event) => {
     Username.value = event.target.value;
@@ -187,9 +238,7 @@
   const updateCity = (event) => {
     City.value = event.target.value;
   };
-  const updateCountry = (event) => {
-    Country.value = event.target.value;
-  };
+
   const updatePresentation = (event) => {
     Presentation.value = event.target.value;
   };
@@ -201,10 +250,10 @@
       FirstName: FirstName.value,
       LastName: LastName.value,
       City: City.value,
-      Country: Country.value,
+      Country: selectedCountry.value.text,
       Presentation: Presentation.value,
       Avatar: null,
-      IdPays: null,
+      IdPays: selectedCountry.value.value,
     };
     console.log(form);
 
@@ -216,15 +265,9 @@
       console.log(e);
     }
 
-    // await axios.post("https://jsonplaceholder.typicode.com/users", {
-    //   Username,
-    //   Password,
-    // });
-
     return {
       updateUsername,
       updatePassword,
-      updateCountry,
       updateFirstName,
       updateLastName,
       updateCity,

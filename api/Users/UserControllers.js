@@ -35,27 +35,27 @@ exports.getUserByUsername = (req, res, next) => {
 
 exports.registerUser = async (req, res, next) => {
   try {
-    const Username = req.body.Username;
+    const Username = req.body.data.Username;
     const DateJoined = new Date().toJSON().slice(0, 10);
     const newUser = new User(
       Username,
-      (Email = req.body.Email),
-      (Password = req.body.Password),
-      (FirstName = req.body.FirstName),
-      (LastName = req.body.LastName),
-      (City = req.body.City),
-      (Presentation = req.body.Presentation),
-      (Avatar = req.body.Avatar),
-      (CountryName = req.body.CountryName),
+      (Email = req.body.data.Email),
+      (Password = req.body.data.Password),
+      (FirstName = req.body.data.FirstName),
+      (LastName = req.body.data.LastName),
+      (City = req.body.data.City),
+      (Presentation = req.body.data.Presentation),
+      (Avatar = req.body.data.Avatar),
+      (CountryName = req.body.data.CountryName),
       DateJoined,
-      (CountryID = req.body.CountryID),
-      (IdGame = req.body.IdGame)
+      (IdPays = req.body.data.IdPays)
     );
     UserServices.addUser(newUser, function (err, data) {
       if (err) {
         console.log("ERROR : ", err);
         res.status(404).json({ msg: "user already exist" });
       } else {
+        console.log("user added");
         UserServices.getUserByUsernameDB(Username, function (err, data) {
           if (err) {
             console.log("ERROR : ", err);
