@@ -1,15 +1,15 @@
 use UltimateTeam;
 
-Insert into Pays (IdPays, LastName, Drapeau) values (1, 'France', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (2, 'Japon', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (3, 'Espagne', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (4, 'Italie', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (5, 'Canada', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (6, 'Allemagne', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (7, 'Russie', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (8, 'Chine', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (9, 'Corée', null);
-Insert into Pays (IdPays, LastName, Drapeau) values (10, 'Royaume-Uni', null);
+Insert into Pays (IdPays, Country, Drapeau) values (1, 'France', null);
+Insert into Pays (IdPays, Country, Drapeau) values (2, 'Japon', null);
+Insert into Pays (IdPays, Country, Drapeau) values (3, 'Espagne', null);
+Insert into Pays (IdPays, Country, Drapeau) values (4, 'Italie', null);
+Insert into Pays (IdPays, Country, Drapeau) values (5, 'Canada', null);
+Insert into Pays (IdPays, Country, Drapeau) values (6, 'Allemagne', null);
+Insert into Pays (IdPays, Country, Drapeau) values (7, 'Russie', null);
+Insert into Pays (IdPays, Country, Drapeau) values (8, 'Chine', null);
+Insert into Pays (IdPays, Country, Drapeau) values (9, 'Corée', null);
+Insert into Pays (IdPays, Country, Drapeau) values (10, 'Royaume-Uni', null);
 
 Insert into Game (IdGame, LastName, DateSortie, TypeJeu, DescriptionJeu, Logo) values (1, 'Minecraft', '11/18/2011', 'PVP', 'Jeu qui consiste à placer des blocs et à partir dans des aventures pour se battre contre des monstres ou des joueurs.', null);
 Insert into Game (IdGame, LastName, DateSortie, TypeJeu, DescriptionJeu, Logo) values (2, 'Overwatch', '05/24/2016', 'FPS', 'Jeu de tir futuriste basé sur une équipe dynamique. Chaque match est une bataille acharnée qui oppose 6 héros uniques.', null);

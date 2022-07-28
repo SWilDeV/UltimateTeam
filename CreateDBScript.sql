@@ -7,7 +7,7 @@ Use UltimateTeam;
 
 Create table if not exists Pays(
 IdPays int NOT NULL auto_increment,
-LastName varchar(50) NOT NULL,
+Country varchar(50) NOT NULL,
 Drapeau varchar(100),
 Primary key (IdPays)
 );

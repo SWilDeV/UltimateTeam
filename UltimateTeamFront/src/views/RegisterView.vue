@@ -191,7 +191,9 @@
 
 <script setup>
   import { ref } from "vue";
-  import { registerUser } from "../apiVue";
+  //import { registerUser } from "../apiVue";
+
+  import { useUserStore } from "@/stores/user";
   import {
     Listbox,
     ListboxButton,
@@ -243,6 +245,7 @@
     Presentation.value = event.target.value;
   };
   const submit = async () => {
+    const userStore = useUserStore();
     let form = {
       Username: Username.value,
       Password: Password.value,
@@ -255,12 +258,12 @@
       Avatar: null,
       IdPays: selectedCountry.value.value,
     };
-    console.log(form);
 
     try {
-      await registerUser(form).then((response) => {
-        console.log(response);
-      });
+      await userStore.register(form);
+      //await registerUser(form).then((response) => {
+      // console.log(response.data);
+      // });
     } catch (e) {
       console.log(e);
     }

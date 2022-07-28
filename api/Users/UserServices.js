@@ -33,8 +33,8 @@ let getUsers = function (callback) {
 };
 let getUserByUsernameDB = function (Username, callback) {
   try {
-    let sql = `SELECT UserID, Username, Password, FirstName, LastName, Avatar, City, Presentation, Email, DateJoined, IdPays FROM Utilisateur WHERE Utilisateur.Username = '${Username}';`;
-    // let sql = `SELECT UserID, Username,Password, FirstName, Avatar, City, Presentation, Email, DateJoined FROM Utilisateur LEFT JOIN Pays ON Utilisateur.IdPays = Pays.IdPays WHERE Utilisateur.Username = '${Username}';`;
+    //let sql = `SELECT UserID, Username, Password, FirstName, LastName, Avatar, City, Presentation, Email, DateJoined, IdPays FROM Utilisateur WHERE Utilisateur.Username = '${Username}';`;
+    let sql = `SELECT u.UserID, u.Username,u.Password, u.FirstName, u.Avatar, u.City, u.Presentation, u.Email, u.DateJoined, p.Country FROM Utilisateur u LEFT JOIN Pays p ON u.IdPays = p.IdPays WHERE u.Username = '${Username}';`;
     db.query(sql, function (err, result) {
       if (err) callback(err, null);
       else callback(null, result[0]);
