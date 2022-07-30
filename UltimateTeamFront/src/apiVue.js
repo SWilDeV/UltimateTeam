@@ -282,7 +282,7 @@ export async function registerUser(data) {
 export async function loginUser(data) {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${import.meta.env.VITE_BASE_URL}/authenticate`, {
+      .post(`${import.meta.env.VITE_BASE_URL}/api/users/authenticate`, {
         data,
       })
       .then((res) => {

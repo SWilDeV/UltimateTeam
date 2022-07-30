@@ -73,8 +73,8 @@ exports.registerUser = async (req, res, next) => {
 
 exports.authenticate = async (req, res, next) => {
   try {
-    const Username = req.body.Username;
-    const Password = req.body.Password;
+    const Username = req.body.data.Username;
+    const Password = req.body.data.Password;
 
     UserServices.getUserByUsernameDB(Username, function (err, data) {
       if (err) {
@@ -90,7 +90,7 @@ exports.authenticate = async (req, res, next) => {
               const token = jwt.sign({ data: data }, process.env.SECRET, {
                 expiresIn: 604800, // 1 week
               });
-
+              res.set({ "x-access-token": token });
               res.status(201).json({
                 success: true,
                 token: "JWT " + token,
@@ -103,8 +103,8 @@ exports.authenticate = async (req, res, next) => {
                   LastName: data.LastName,
                   City: data.City,
                   Presentation: data.Presentation,
-                  LastName: data.LastName,
                   DateJoined: data.DateJoined,
+                  Country: data.Country,
                 },
               });
             } else {
