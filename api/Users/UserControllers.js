@@ -61,7 +61,13 @@ exports.registerUser = async (req, res, next) => {
             console.log("ERROR : ", err);
           } else {
             delete data.Password;
-            res.status(201).json({ data });
+            const token = jwt.sign({ data: data }, process.env.SECRET, {
+              expiresIn: 604800, // 1 week
+            });
+            res.status(201).json({
+              token: "JWT " + token,
+              data,
+            });
           }
         });
       }
@@ -79,7 +85,10 @@ exports.authenticate = async (req, res, next) => {
     UserServices.getUserByUsernameDB(Username, function (err, data) {
       if (err) {
         console.log("ERROR : ", err);
-        res.status(404).json({ msg: "user not found" });
+        res.status(404).json({
+          msg: "user not found",
+          success: false,
+        });
       } else if (data != null) {
         UserServices.comparePassword(
           Password,
@@ -90,8 +99,8 @@ exports.authenticate = async (req, res, next) => {
               const token = jwt.sign({ data: data }, process.env.SECRET, {
                 expiresIn: 604800, // 1 week
               });
-              res.set({ "x-access-token": token });
               res.status(201).json({
+                msg: "user found",
                 success: true,
                 token: "JWT " + token,
                 data: {

@@ -34,7 +34,9 @@
                 :aria-current="item.current ? 'page' : undefined"
                 :to="item.route"
                 @click="changeStatus(item)"
-                >{{ item.name }}
+                ><div v-if="isSignedIn">
+                  {{ item.name }}
+                </div>
               </RouterLink>
             </div>
           </div>
@@ -45,17 +47,20 @@
           <!-- Navbar right elements -->
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
-              <RouterLink
-                v-for="item in navigationRight"
-                :key="item.name"
-                :class="[
-                  'text-gray-300 hover:bg-gray-700 hover:text-white',
-                  'px-3 py-2 rounded-md text-l font-medium',
-                ]"
-                :aria-current="item.current ? 'page' : undefined"
-                :to="item.route"
-                >{{ item.name }}
-              </RouterLink>
+              <div v-if="!isSignedIn">
+                <RouterLink
+                  v-for="item in navigationRight"
+                  :key="item.name"
+                  :class="[
+                    'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'px-3 py-2 rounded-md text-l font-medium',
+                  ]"
+                  :aria-current="item.current ? 'page' : undefined"
+                  :to="item.route"
+                >
+                  {{ item.name }}
+                </RouterLink>
+              </div>
             </div>
           </div>
           <!-- Profile dropdown -->
@@ -85,7 +90,7 @@
               >
                 <MenuItem v-slot="{ active }">
                   <RouterLink
-                    to="profile"
+                    to="/profile"
                     :class="[
                       active ? 'bg-gray-100' : '',
                       'block px-4 py-2 text-sm text-gray-700',
@@ -100,6 +105,7 @@
                       active ? 'bg-gray-100' : '',
                       'block px-4 py-2 text-sm text-gray-700',
                     ]"
+                    @Click="logOut()"
                     >Sign out</a
                   >
                 </MenuItem>
@@ -159,17 +165,20 @@
     MenuItems,
   } from "@headlessui/vue";
   import { MenuIcon, XIcon } from "@heroicons/vue/outline";
+  import { useUserStore } from "@/stores/user";
+  const userStore = useUserStore();
+  let isSignedIn = userStore.isSignedIn;
 
   const navigation = [
     { name: "UltimateTeam", route: "/", current: true },
-    { name: "Tournaments", route: "tournaments", current: false },
-    { name: "Teams", route: "teams", current: false },
-    { name: "Matchs", route: "matchs", current: false },
-    { name: "Profile", route: "profile", current: false },
+    { name: "Tournaments", route: "/tournaments", current: false },
+    { name: "Teams", route: "/teams", current: false },
+    { name: "Matchs", route: "/matchs", current: false },
+    { name: "Profile", route: "/profile", current: false },
   ];
   const navigationRight = [
-    { name: "Register", route: "register", current: true },
-    { name: "Login", route: "login", current: false },
+    { name: "Register", route: "/register", current: true },
+    { name: "Login", route: "/login", current: false },
   ];
 
   const changeStatus = (item) => {
@@ -177,5 +186,9 @@
       element.current = false;
     });
     item.current = true;
+  };
+
+  const logOut = () => {
+    userStore.logout();
   };
 </script>

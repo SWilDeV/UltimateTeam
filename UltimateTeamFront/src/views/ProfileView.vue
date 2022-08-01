@@ -19,16 +19,13 @@
             />
             <div></div>
           </div>
-          <h2 class="text-gray-300 text-xl font-bold">Jean-Luc</h2>
-          <p class="font-medium font-lg mt-2 text-gray-200">Osaka, Japon</p>
+          <h2 class="text-gray-300 text-xl font-bold">{{ user.Username }}</h2>
+          <p class="font-medium font-lg mt-2 text-gray-200">
+            {{ user.City }}, {{ user.Country }}
+          </p>
           <div class="mt-4 grid grid-cols-1 gap-4">
             <p class="text-gray-300">
-              Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl
-              Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed,
-              nislMorbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed,
-              nislMorbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed,
-              nislMorbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed,
-              nisl
+              {{ user.Presentation }}
             </p>
           </div>
         </div>
@@ -38,27 +35,30 @@
         <div class="bg-gray-800 p-5 w-full rounded-md box-border shadow">
           <div class="flex justify-between w-full">
             <h2 class="font-bold text-gray-300">Username</h2>
-            <h2 class="text-gray-300 font-bold pr-5">M3lanSh'On</h2>
+            <h2 class="text-gray-300 font-bold pr-5">{{ user.Username }}</h2>
+            <!-- <h2 class="text-gray-300 font-bold pr-5">M3lanSh'On</h2> -->
           </div>
           <hr />
           <div class="flex justify-between w-full mt-5">
             <h2 class="font-bold text-gray-300">Email</h2>
-            <h2 class="text-gray-300 font-bold pr-5">aaa@aa.com</h2>
+            <h2 class="text-gray-300 font-bold pr-5">{{ user.Email }}</h2>
           </div>
           <hr />
           <div class="flex justify-between w-full mt-5">
-            <h2 class="font-bold text-gray-300">Nom</h2>
-            <h2 class="text-gray-300 font-bold pr-5">aaa aaa</h2>
+            <h2 class="font-bold text-gray-300">Name</h2>
+            <h2 class="text-gray-300 font-bold pr-5">
+              {{ user.FirstName }} {{ user.LastName }}
+            </h2>
           </div>
           <hr />
           <div class="flex justify-between w-full mt-5">
-            <h2 class="font-bold text-gray-300">Pays</h2>
-            <h2 class="text-gray-300 font-bold pr-5">France</h2>
+            <h2 class="font-bold text-gray-300">Country</h2>
+            <h2 class="text-gray-300 font-bold pr-5">{{ user.Country }}</h2>
           </div>
           <hr />
           <div class="flex justify-between w-full mt-5">
-            <h2 class="font-bold text-gray-300">Inscrit le:</h2>
-            <h2 class="text-gray-300 font-bold pr-5">2022-06-18</h2>
+            <h2 class="font-bold text-gray-300">Registered since:</h2>
+            <h2 class="text-gray-300 font-bold pr-5">{{ user.DateJoined }}</h2>
           </div>
           <hr />
         </div>
@@ -67,14 +67,14 @@
     <!-- Tournament info-->
     <div class="mt-2 lg:flex block lg:gap-2">
       <div class="mt-2 bg-gray-800 p-5 w-full rounded-md box-border shadow">
-        <h2 class="font-bold text-lg text-gray-200">Tournois inscrits</h2>
+        <h2 class="font-bold text-lg text-gray-200">Tournaments</h2>
         <p class="text-gray-400 font-lexend font-normal">
           New products this week
         </p>
       </div>
       <div class="mt-2 bg-gray-800 p-5 w-full rounded-md box-border shadow">
         <h2 class="font-bold text-lg text-gray-300 dark:text-gray-200">
-          Equipes dont je fais parti
+          Teams
         </h2>
         <p class="text-gray-400 font-lexend font-normal">Visitor this week</p>
       </div>
@@ -89,4 +89,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+  import { useUserStore } from "@/stores/user";
+  const userStore = useUserStore();
+  const user = JSON.parse(localStorage.getItem("user"));
+</script>
