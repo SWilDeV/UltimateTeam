@@ -134,20 +134,6 @@
             >{{ item.name }}
           </RouterLink>
         </DisclosureButton>
-        <!-- <DisclosureButton
-          v-for="item in navigation"
-          :key="item.name"
-          as="a"
-          :href="item.href"
-          :class="[
-            item.current
-              ? 'bg-gray-900 text-white'
-              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-            'block px-3 py-2 rounded-md text-base font-medium',
-          ]"
-          :aria-current="item.current ? 'page' : undefined"
-          >{{ item.name }}</DisclosureButton
-        > -->
       </div>
     </DisclosurePanel>
   </Disclosure>
@@ -165,10 +151,16 @@
     MenuItems,
   } from "@headlessui/vue";
   import { MenuIcon, XIcon } from "@heroicons/vue/outline";
-  import { useUserStore } from "@/stores/user";
-  const userStore = useUserStore();
-  let isSignedIn = userStore.isSignedIn;
+  import { ref, onMounted } from "vue";
+  // import { storeToRefs } from "pinia";
+  // import { useUserStore } from "@/stores/user";
+  // const userStore = useUserStore();
+  // let { user, authToken, isSignedIn } = storeToRefs(userStore);
+  let isSignedIn = ref();
 
+  onMounted(() => {
+    checkSignedIn();
+  });
   const navigation = [
     { name: "UltimateTeam", route: "/", current: true },
     { name: "Tournaments", route: "/tournaments", current: false },
@@ -190,5 +182,11 @@
 
   const logOut = () => {
     userStore.logout();
+  };
+
+  const checkSignedIn = () => {
+    if (localStorage.getItem("isSignedIn") == true) {
+      isSignedIn = true;
+    }
   };
 </script>
