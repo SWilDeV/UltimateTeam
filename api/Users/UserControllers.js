@@ -53,7 +53,7 @@ exports.registerUser = async (req, res, next) => {
     UserServices.addUser(newUser, function (err, data) {
       if (err) {
         console.log("ERROR : ", err);
-        res.status(404).json({ msg: "user already exist" });
+        res.status(200).json({ msg: "user already exist" });
       } else {
         console.log("user added");
         UserServices.getUserByUsernameDB(Username, function (err, data) {
@@ -62,7 +62,7 @@ exports.registerUser = async (req, res, next) => {
           } else {
             delete data.Password;
             const token = jwt.sign({ data: data }, process.env.SECRET, {
-              expiresIn: 604800, // 1 week
+              expiresIn: 3600, // 1 week
             });
             res.status(201).json({
               token: "JWT " + token,
@@ -82,51 +82,51 @@ exports.authenticate = async (req, res, next) => {
     const Username = req.body.data.Username;
     const Password = req.body.data.Password;
 
-    UserServices.getUserByUsernameDB(Username, function (err, data) {
+    UserServices.getUserByUsernameDB(Username, function (err, datas) {
       if (err) {
         console.log("ERROR : ", err);
-        res.status(404).json({
+        res.status(200).json({
           msg: "user not found",
           success: false,
         });
-      } else if (data != null) {
+      } else if (datas != null) {
         UserServices.comparePassword(
           Password,
-          data.Password,
+          datas.Password,
           (err, isMatch) => {
             if (err) throw err;
             if (isMatch) {
-              const token = jwt.sign({ data: data }, process.env.SECRET, {
-                expiresIn: 604800, // 1 week
+              const token = jwt.sign({ datas: datas }, process.env.SECRET, {
+                expiresIn: 3600, // 1 hour
               });
               res.status(201).json({
                 msg: "user found",
                 success: true,
                 token: "JWT " + token,
                 data: {
-                  UserID: data.UserID,
-                  Username: data.Username,
-                  Email: data.Email,
-                  FirstName: data.FirstName,
-                  Avatar: data.Avatar,
-                  LastName: data.LastName,
-                  City: data.City,
-                  Presentation: data.Presentation,
-                  DateJoined: data.DateJoined,
-                  Country: data.Country,
+                  UserID: datas.UserID,
+                  Username: datas.Username,
+                  Email: datas.Email,
+                  FirstName: datas.FirstName,
+                  Avatar: datas.Avatar,
+                  LastName: datas.LastName,
+                  City: datas.City,
+                  Presentation: datas.Presentation,
+                  DateJoined: datas.DateJoined,
+                  Country: datas.Country,
                 },
               });
             } else {
               return res
-                .status(404)
+                .status(201)
                 .json({ success: false, msg: "Wrong password" });
             }
           }
         );
       } else {
-        res.status(404).json({
+        res.status(201).json({
           success: false,
-          msg: "wrong combinaison Username/Password",
+          msg: "wrong combination Username/Password",
         });
       }
     });

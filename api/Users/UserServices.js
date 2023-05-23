@@ -63,6 +63,7 @@ let comparePassword = function (candidatePassword, hashedPassword, callback) {
   });
 };
 
+
 module.exports = {
   getUsers,
   addUser,
